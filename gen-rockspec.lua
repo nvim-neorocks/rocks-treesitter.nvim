@@ -10,7 +10,7 @@ version = _MODREV .. _SPECREV
 
 dependencies = {
     "lua >= 5.1",
-    "nvim-treesitter ~> 0.9",
+    "nvim-treesitter",
     -- generated dependencies from rocks-binaries
     %s
 }
