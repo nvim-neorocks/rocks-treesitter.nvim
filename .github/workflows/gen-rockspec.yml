@@ -2,6 +2,7 @@ name: Generate rockspec
 
 on:
   push:
+    branches: ["main"]
   schedule:
     # Runs every 24 hours, after the rocks-binaries job
     - cron: "0/45 */24 * * *"
