@@ -49,6 +49,9 @@ jobs:
       - name: Test install
         run: |
           luarocks --local make ./rocks-treesitter.nvim-scm-1.rockspec --server='https://nvim-neorocks.github.io/rocks-binaries/'
+      - name: Install `dkjson` Package
+        run: |
+          luarocks --verbose --local --lua-version=5.1 install dkjson
       - name: Upload to luarocks
         run: |
           luarocks --verbose upload ./rocks-treesitter.nvim-scm-1.rockspec --api-key "${{ env.LUAROCKS_API_KEY }}" --force
