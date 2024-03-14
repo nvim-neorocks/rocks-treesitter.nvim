@@ -56,10 +56,21 @@ by default.
 Simply run `:Rocks install rocks-treesitter.nvim`,
 and you are good to go!
 
+> [!IMPORTANT]
+>
+> Because this plugin comes with a large number of tree-sitter
+> parsers, the initial installation may take a long time.
+
 ## :books: Usage
 
 This plugin works out of the box and doesn't need any configuration.
 However, you can override its default configuration in one of two ways:
+
+> [!WARNING]
+>
+> Treesitter and nvim-treesitter highlighting are an experimental feature of Neovim.
+> As with nvim-treesitter, please consider tree-sitter support with this plugin
+> experimental.
 
 ### Using rocks.toml
 
