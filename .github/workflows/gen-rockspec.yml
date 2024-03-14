@@ -48,7 +48,7 @@ jobs:
           ./gen-rockspec.lua
       - name: Test install
         run: |
-          luarocks --local make ./rocks-treesitter.nvim-scm-1.rockspec
+          luarocks --local make ./rocks-treesitter.nvim-scm-1.rockspec --server='https://nvim-neorocks.github.io/rocks-binaries/'
       - name: Upload to luarocks
         run: |
           luarocks --verbose upload ./rocks-treesitter.nvim-scm-1.rockspec --api-key "${{ env.LUAROCKS_API_KEY }}" --force
