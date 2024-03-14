@@ -1,0 +1,52 @@
+name: Generate rockspec
+
+on:
+  push:
+  schedule:
+    # Runs every 24 hours, after the rocks-binaries job
+    - cron: "0/45 */24 * * *"
+  workflow_dispatch:
+ 
+# Prevent concurrent auto-commits
+concurrency:
+  group: auto-commit
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+      - name: Install C/C++ Compiler
+        uses: rlalik/setup-cpp-compiler@master
+        with:
+          compiler: clang-latest
+      - name: Install Lua
+        uses: leso-kn/gh-actions-lua@master
+        with:
+          luaVersion: "5.1"
+      - name: Install Luarocks
+        uses: hishamhm/gh-actions-luarocks@master
+      - name: Get tree-sitter-parsers.json
+        uses: actions/checkout@v4
+        with: 
+          repository: nvim-neorocks/nurr
+          sparse-checkout: |
+            tree-sitter-parsers.json
+          path: nurr
+      - name: Install Neovim
+        uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: nightly
+      - name: Generate rockspec
+        run: |
+          mv nurr/tree-sitter-parsers.json .
+          ./gen-rockspec.lua
+      - name: commit-linux-x86_64
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: generate rockspec"
+          file_pattern: "*.rockspec"

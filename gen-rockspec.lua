@@ -67,12 +67,14 @@ local parsers_tbl = vim.iter(vim.json.decode(content).parsers)
         local sc = vim.system({
             "luarocks",
             "--lua-version=5.1",
-            "--only_server='https://nvim-neorocks.github.io/rocks-binaries/'",
+            "--only-server='https://nvim-neorocks.github.io/rocks-binaries/'",
             "search",
             "--porcelain",
             rock_name,
         }):wait()
         if sc.code ~= 0 or not sc.stdout then
+            print(sc.stdout or "")
+            print(sc.stderr or "")
             error("Failed to search rocks-binaries")
         end
         for line in sc.stdout:gmatch("[^\r\n]+") do
