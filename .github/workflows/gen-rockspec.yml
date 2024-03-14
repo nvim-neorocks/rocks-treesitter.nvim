@@ -16,6 +16,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-20.04
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -55,7 +57,7 @@ jobs:
       - name: Upload to luarocks
         run: |
           luarocks --verbose upload ./rocks-treesitter.nvim-scm-1.rockspec --api-key "${{ env.LUAROCKS_API_KEY }}" --force
-      - name: commit-linux-x86_64
+      - name: Commit generated rockspec
         uses: stefanzweifel/git-auto-commit-action@v5
         if: always()
         with:
