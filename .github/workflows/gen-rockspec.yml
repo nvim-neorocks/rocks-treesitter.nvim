@@ -45,6 +45,12 @@ jobs:
         run: |
           mv nurr/tree-sitter-parsers.json .
           ./gen-rockspec.lua
+      - name: Test install
+        run: |
+          luarocks --local make ./rocks-treesitter.nvim-scm-1.rockspec
+      - name: Upload to luarocks
+        run: |
+          luarocks --verbose upload ./rocks-treesitter.nvim-scm-1.rockspec --api-key "${{ env.LUAROCKS_API_KEY }}" --force
       - name: commit-linux-x86_64
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
