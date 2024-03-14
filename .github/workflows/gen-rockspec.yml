@@ -54,5 +54,5 @@ jobs:
       - name: commit-linux-x86_64
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore: generate rockspec"
+          commit_message: "chore(deps): generate rockspec"
           file_pattern: "*.rockspec"
