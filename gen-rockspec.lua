@@ -89,8 +89,8 @@ local parsers_tbl = vim.iter(vim.json.decode(content).parsers)
     end)
     :totable()
 
-local dependencies_string = vim.print(generate_dependencies_str(parsers_tbl, 5))
-local formatted_rockspec = rockspec_template:format(dependencies_string)
+local dependencies_string = generate_dependencies_str(parsers_tbl, 5)
+local formatted_rockspec = vim.print(rockspec_template:format(dependencies_string))
 
 -- fetched from nvim-neorocks/nurr
 local filename = "rocks-treesitter.nvim-scm-1.rockspec"
