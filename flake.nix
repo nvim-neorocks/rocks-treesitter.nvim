@@ -89,13 +89,17 @@
             ${pre-commit-check.shellHook}
             ln -fs ${pkgs.luarc-to-json luarc} .luarc.json
           '';
-          buildInputs = with pre-commit-hooks.packages.${system}; [
-            alejandra
-            lua-language-server
-            stylua
-            luacheck
-            editorconfig-checker
-          ];
+          buildInputs = with pre-commit-hooks.packages.${system};
+            [
+              alejandra
+              lua-language-server
+              stylua
+              luacheck
+              editorconfig-checker
+            ]
+            ++ (with pkgs; [
+              (lua5_1.withPackages (ps: [ps.luarocks]))
+            ]);
         };
       in {
         devShells = {
