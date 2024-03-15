@@ -68,7 +68,7 @@ However, you can override its default configuration in one of two ways:
 
 > [!WARNING]
 >
-> Treesitter and nvim-treesitter highlighting are an experimental feature of Neovim.
+> Tree-sitter and nvim-treesitter highlighting are an experimental feature of Neovim.
 > As with nvim-treesitter, please consider tree-sitter support with this plugin
 > experimental.
 
@@ -104,6 +104,22 @@ vim.g.rocks_nvim = {
 > If both configuration methods are used, the
 > lua configuration is given higher priority,
 > to support things like `:h exrc`.
+
+## :construction: Current limitations
+
+- If you install rocks-treesitter.nvim from the `dev` manifest
+  (e.g. by specifying the `dev` version), luarocks will not prioritise
+  the rocks-binaries server when fetching dependencies.
+  This may lead to tree-sitter parsers having to be built locally.
+- Because tree-sitter support is an experimental feature of Neovim,
+  and many parsers do not use SemVer versioning,
+  nvim-treesitter's queries for highlighting, etc. can become outdated.
+  Especially for parsers that do not have SemVer tags, pinning compatible
+  versions can be very difficult.
+  In such cases, it might be better to install them from SCM manually.
+- Currently, we are having issues building the tree-sitter parsers for
+  Windows in our rocks-binaries CI. It is likely that you will run into
+  the same issues if you are on Windows.
 
 ## :book: License
 
