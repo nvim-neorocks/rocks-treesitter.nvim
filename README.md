@@ -111,6 +111,9 @@ vim.g.rocks_nvim = {
   (e.g. by specifying the `dev` version), luarocks will not prioritise
   the rocks-binaries server when fetching dependencies.
   This may lead to tree-sitter parsers having to be built locally.
+  To work around this, we are hosting this plugin on rocks-binaries,
+  so that luarocks will prioritise it if you don't specify the
+  `dev` version.
 - Because tree-sitter support is an experimental feature of Neovim,
   and many parsers do not use SemVer versioning,
   nvim-treesitter's queries for highlighting, etc. can become outdated.
