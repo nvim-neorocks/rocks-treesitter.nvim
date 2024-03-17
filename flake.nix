@@ -46,6 +46,7 @@
         pkgs = import nixpkgs {
           inherit system;
           overlays = [
+            self.overlays.default
             neorocks.overlays.default
             gen-luarc.overlays.default
           ];
@@ -54,13 +55,9 @@
         luarc = pkgs.mk-luarc {
           nvim = pkgs.neovim-nightly;
           neodev-types = "nightly";
-          plugins = with pkgs.lua51Packages;
-            [
-              rocks-nvim
-            ]
-            ++ (with pkgs.vimPlugins; [
-              nvim-treesitter
-            ]);
+          plugins = with pkgs.lua51Packages; [
+            rocks-nvim
+          ];
         };
 
         type-check-nightly = pre-commit-hooks.lib.${system}.run {
@@ -102,6 +99,8 @@
             ]);
         };
       in {
+        packages.default = pkgs.lua51Packages.rocks-treesitter-nvim;
+
         devShells = {
           default = devShell;
           inherit devShell;
@@ -113,6 +112,9 @@
             type-check-nightly
             ;
         };
+      };
+      flake = {
+        overlays.default = import ./nix/overlay.nix {inherit self;};
       };
     };
 }
