@@ -25,27 +25,32 @@
 
 [![LuaRocks][luarocks-shield]][luarocks-url]
 
+> [!WARNING]
+>
+> This module is WIP and not yet functional
+
 ## :star2: Summary
 
-`rocks-treesitter.nvim` is a wrapper around [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
-that comes with all parsers that are available on [rocks-binaries](https://nvim-neorocks.github.io/rocks-binaries/).
+`rocks-treesitter.nvim` is a rocks.nvim module that helps you manage
+and use [tree-sitter](https://neovim.io/doc/user/treesitter.html) parsers.
+
+It aims to be a minimal replacement for [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter).
+
+Parsers, bundled with queries, are hosted on [rocks-binaries (dev)](https://nvim-neorocks.github.io/rocks-binaries-dev/),
+so that you don't have to compile them on your machine.
 
 ### Do I need this plugin?
 
 No. Plugins that depend on tree-sitter parsers can specify
 the dependencies in their rockspecs.
 
-You can also install nvim-treesitter and set it up as you are used to.
-Instead of passing `ensure_installed` to the `setup` function,
-or using `:TSInstall <lang>`, you can run `:Rocks install tree-sitter-<lang>`.
+You can also install the parsers manually, using `:Rocks install tree-sitter-<lang>`.
+To enable highlighting for parser `<lang>`, all you need to do is create a
+`ftplugin/<lang>.lua` file, and in it, call `vim.treesitter.start()`.
+
 See also the [rocks.nvim README's tree-sitter section](https://github.com/nvim-neorocks/rocks.nvim?tab=readme-ov-file#deciduous_tree-enhanced-tree-sitter-support).
 
-This plugin is simply for convenience.
-Installing this plugin automatically installs nvim-treesitter and
-all parsers that don't need their sources to be generated
-using the `tree-sitter-cli` as dependencies,
-and sets up nvim-treesitter with syntax highlighting enabled
-by default.
+This plugin is for convenience.
 
 ## :pencil: Requirements
 
@@ -68,22 +73,34 @@ However, you can override its default configuration in one of two ways:
 
 > [!WARNING]
 >
-> Tree-sitter and nvim-treesitter highlighting are an experimental feature of Neovim.
-> As with nvim-treesitter, please consider tree-sitter support with this plugin
-> experimental.
+> - Tree-sitter and nvim-treesitter highlighting are an experimental feature of Neovim.
+>   As with nvim-treesitter, please consider tree-sitter support with this plugin
+>   experimental.
+>
+> - We are not affiliated with the nvim-treesitter maintainers.
+>   If you are facing issues with tree-sitter support in rocks.nvim,
+>   please don't bug them.
+
+## :wrench: Configuration
 
 ### Using rocks.toml
 
-You can add a `[rocks-treesitter]` section to your rocks.toml,
+You can add a `[treesitter]` section to your rocks.toml,
 and use it to set any options you would otherwise pass to
 `require("nvim-treesitter.configs").setup {}`[^1].
 
 [^1]: See [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) for configuration options.
 
 ```toml
-[rocks-treesitter]
-dont_remove_install_commands = false
-# Other nvim-treesitter configs
+[[treesitter.auto_highlight]]
+# "all"
+"haskell"
+"dhall"
+"rust"
+"zig"
+
+[treesitter]
+auto_install = true
 ```
 
 ### With lua:
@@ -93,7 +110,7 @@ Or, you add a lua table to your `vim.g.rocks_nvim` setting:
 ```lua
 vim.g.rocks_nvim = {
     -- rocks.nvim config
-    rocks_treesitter = {
+    treesitter = {
         -- tree-sitter configs here
     },
 }
@@ -107,19 +124,6 @@ vim.g.rocks_nvim = {
 
 ## :construction: Current limitations
 
-- If you install rocks-treesitter.nvim from the `dev` manifest
-  (e.g. by specifying the `dev` version), luarocks will not prioritise
-  the rocks-binaries server when fetching dependencies.
-  This may lead to tree-sitter parsers having to be built locally.
-  To work around this, we are hosting this plugin on rocks-binaries,
-  so that luarocks will prioritise it if you don't specify the
-  `dev` version.
-- Because tree-sitter support is an experimental feature of Neovim,
-  and many parsers do not use SemVer versioning,
-  nvim-treesitter's queries for highlighting, etc. can become outdated.
-  Especially for parsers that do not have SemVer tags, pinning compatible
-  versions can be very difficult.
-  In such cases, it might be better to install them from SCM manually.
 - Currently, we are having issues building the tree-sitter parsers for
   Windows in our rocks-binaries CI. It is likely that you will run into
   the same issues if you are on Windows.

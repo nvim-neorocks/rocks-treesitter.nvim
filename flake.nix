@@ -1,5 +1,5 @@
 {
-  description = "A bridge to nvim-treesitter that comes with all parsers that are available on rocks-binaries";
+  description = "A rocks.nvim module that helps you manage tree-sitter parsers";
 
   nixConfig = {
     extra-substituters = "https://neorocks.cachix.org";
