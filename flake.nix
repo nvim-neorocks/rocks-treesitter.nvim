@@ -95,7 +95,7 @@
               editorconfig-checker
             ]
             ++ (with pkgs; [
-              (lua5_1.withPackages (ps: [ps.luarocks]))
+              (lua5_1.withPackages (ps: with ps; [luarocks dkjson]))
             ]);
         };
       in {
