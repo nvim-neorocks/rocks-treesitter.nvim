@@ -47,35 +47,41 @@ local function try_start_highlight(rock)
     vim.treesitter.start()
 end
 
+---@type { [string]: boolean? }
+local _declined_installs = {}
+
 ---@param rocks Rock[]
 local function prompt_auto_install(rocks)
+    local rock_name = rocks[1].name
+    if _declined_installs[rock_name] then
+        return
+    end
     ---@param version string?
-    local function install_rock_if_version_set(version)
+    local function install_rock_or_mark_declined(version)
         if version then
-            api.install(rocks[1].name, version, function(installed_rock)
+            api.install(rock_name, version, function(installed_rock)
                 ---@cast installed_rock Rock
                 try_start_highlight(installed_rock)
             end)
+        else
+            _declined_installs[rock_name] = true
         end
     end
     if #rocks == 1 then
         local rock = rocks[1]
         local yesno = vim.fn.input("Install " .. rock.name .. "? y/n: ")
         print("\n ")
-        if string.match(yesno, "^y.*") then
-            install_rock_if_version_set(rock.version)
-        end
+        install_rock_or_mark_declined(string.match(yesno, "^y.*") and rock.version)
     elseif #rocks > 1 then
-        local choices = #rocks == 1 and { "yes", "no" }
-            or vim.iter(rocks)
-                :map(function(rock)
-                    ---@cast rock Rock
-                    return rock.version
-                end)
-                :totable()
+        local choices = vim.iter(rocks)
+            :map(function(rock)
+                ---@cast rock Rock
+                return rock.version
+            end)
+            :totable()
         vim.ui.select(choices, {
-            prompt = "Install " .. rocks[1].name .. "? Select a version or <C-c> to cancel",
-        }, install_rock_if_version_set)
+            prompt = "Install " .. rock_name .. "? Select a version or <C-c> to cancel",
+        }, install_rock_or_mark_declined)
     end
 end
 
