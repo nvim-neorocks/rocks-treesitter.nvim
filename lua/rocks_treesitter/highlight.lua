@@ -68,22 +68,23 @@ local function prompt_auto_install(rocks)
             _declined_installs[rock_name] = true
         end
     end
-    if #rocks == 1 then
-        local rock = rocks[1]
-        local yesno = vim.fn.input("Install " .. rock.name .. "? y/n: ")
-        print("\n ")
-        install_rock_or_mark_declined(string.match(yesno, "^y.*") and rock.version)
-    elseif #rocks > 1 then
-        local choices = vim.iter(rocks)
-            :map(function(rock)
-                ---@cast rock Rock
-                return rock.version
-            end)
-            :totable()
-        vim.ui.select(choices, {
-            prompt = "Install " .. rock_name .. "? Select a version or <C-c> to cancel",
-        }, install_rock_or_mark_declined)
-    end
+    -- TODO: Enable check when we have tagged releases
+    -- if #rocks == 1 then
+    local rock = rocks[1]
+    local yesno = vim.fn.input("Install " .. rock.name .. "? y/n: ")
+    print("\n ")
+    install_rock_or_mark_declined(string.match(yesno, "^y.*") and rock.version)
+    -- elseif #rocks > 1 then
+    --     local choices = vim.iter(rocks)
+    --         :map(function(rock)
+    --             ---@cast rock Rock
+    --             return rock.version
+    --         end)
+    --         :totable()
+    --     vim.ui.select(choices, {
+    --         prompt = "Install " .. rock_name .. "? Select a version or <C-c> to cancel",
+    --     }, install_rock_or_mark_declined)
+    -- end
 end
 
 ---@param config RocksTreesitterConfig
