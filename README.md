@@ -92,14 +92,14 @@ and use it to set any options you would otherwise pass to
 [^1]: See [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) for configuration options.
 
 ```toml
-[[treesitter.auto_highlight]]
-# "all"
-"haskell"
-"dhall"
-"rust"
-"zig"
-
 [treesitter]
+# auto_highlight = "all"
+auto_highlight = [
+  "haskell",
+  "dhall",
+  "rust",
+  "zig"
+]
 auto_install = "prompt" # true | false
 ```
 

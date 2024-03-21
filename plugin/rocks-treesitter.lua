@@ -8,7 +8,7 @@ local auto_highlight = config.auto_highlight
 if
     auto_highlight == "all"
     ---@cast auto_highlight { [string]: boolean }
-    or not vim.tbl_isempty(auto_highlight)
+    or not next(auto_highlight)
 then
     require("rocks_treesitter.highlight").create_autocmd(config)
 end
