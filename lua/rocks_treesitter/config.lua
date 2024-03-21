@@ -18,7 +18,7 @@ local api = require("rocks.api")
 
 local toml_config = api.get_rocks_toml()["tree-sitter"]
 ---@type RocksTreesitterOpts
-local lua_config = vim.g.rocks_nvim and vim.g.rocks_nvim.treesitter or {}
+local lua_config = vim.g.rocks_nvim and vim.g.rocks_nvim.treesitter
 
 local opts = {}
 
@@ -26,7 +26,7 @@ if type(toml_config) == "table" then
     opts = vim.tbl_deep_extend("force", opts, toml_config)
 end
 
-opts = vim.tbl_deep_extend("force", config or opts, lua_config)
+opts = vim.tbl_deep_extend("force", config or opts, lua_config or {})
 
 --- Map opts to configs, preserving defaults if not set
 config.auto_highlight = opts.auto_highlight == "all" and "all"
@@ -48,7 +48,7 @@ if not toml_config and not lua_config then
 auto_install = false
 ]==]
     local rocks_toml_path = api.get_rocks_toml_path()
-    uv.fs_open(rocks_toml_path, "w+", tonumber("644", 8), function(err, file)
+    uv.fs_open(rocks_toml_path, "r+", tonumber("644", 8), function(err, file)
         if err or not file then
             return
         end
