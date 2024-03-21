@@ -4,8 +4,13 @@ end
 
 local config = require("rocks_treesitter.config")
 
-if config.auto_highlight == "all" or not vim.tbl_isempty(config.auto_highlight) then
-    require("rocks_treesitter.highlight").create_autocmd()
+local auto_highlight = config.auto_highlight
+if
+    auto_highlight == "all"
+    ---@cast auto_highlight { [string]: boolean }
+    or not vim.tbl_isempty(auto_highlight)
+then
+    require("rocks_treesitter.highlight").create_autocmd(config)
 end
 
 vim.g.did_load_rocks_treesitter = true
