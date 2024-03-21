@@ -59,7 +59,8 @@ local function prompt_auto_install(rocks)
     ---@param version string?
     local function install_rock_or_mark_declined(version)
         if version then
-            api.install(rock_name, version, function(installed_rock)
+            -- TODO: replace "dev" with version once we have tagged releases
+            api.install(rock_name, "dev", function(installed_rock)
                 ---@cast installed_rock Rock
                 try_start_highlight(installed_rock)
             end)
@@ -99,7 +100,8 @@ local function do_highlight(config, lang)
     if config.auto_install == "prompt" then
         prompt_auto_install(rocks)
     elseif config.auto_install then
-        api.install(rocks[1].name, nil, try_start_highlight)
+        -- TODO: replace "dev" with nil once we have tagged releases
+        api.install(rocks[1].name, "dev", try_start_highlight)
     end
 end
 
