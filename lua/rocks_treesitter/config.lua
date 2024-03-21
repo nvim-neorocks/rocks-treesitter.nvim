@@ -48,7 +48,7 @@ if not toml_config and not lua_config then
 auto_install = false
 ]==]
     local rocks_toml_path = api.get_rocks_toml_path()
-    uv.fs_open(rocks_toml_path, "r+", tonumber("644", 8), function(err, file)
+    uv.fs_open(rocks_toml_path, "r", tonumber("644", 8), function(err, file)
         if err or not file then
             return
         end
@@ -56,11 +56,16 @@ auto_install = false
         if not stat then
             return
         end
-        local content = uv.fs_read(file, stat.size, 0)
-        content = content .. "\n\n" .. default_toml
-        local file_pipe = uv.new_pipe(false)
-        uv.write(file_pipe, content)
+        local content = uv.fs_read(file, stat.size, 0) .. "\n\n" .. default_toml
         uv.fs_close(file)
+        uv.fs_open(rocks_toml_path, "w+", tonumber("644", 8), function(err_write, file_write)
+            if err_write or not file_write then
+                return
+            end
+            local file_pipe = uv.new_pipe(false)
+            uv.write(file_pipe, content)
+            uv.fs_close(file)
+        end)
     end)
 end
 
