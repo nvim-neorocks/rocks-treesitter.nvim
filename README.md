@@ -17,7 +17,7 @@
   </p>
   <p>
     <strong>
-      A "just works" tree-sitter setup for <a href="https://github.com/nvim-neorocks/rocks.nvim/">rocks.nvim</a>! 
+      A "just works" tree-sitter setup for <a href="https://github.com/nvim-neorocks/rocks.nvim/">rocks.nvim</a>!
     </strong>
   </p>
 </div>
@@ -100,7 +100,7 @@ and use it to set any options you would otherwise pass to
 "zig"
 
 [treesitter]
-auto_install = true
+auto_install = "prompt" # true | false
 ```
 
 ### With lua:
@@ -111,7 +111,9 @@ Or, you add a lua table to your `vim.g.rocks_nvim` setting:
 vim.g.rocks_nvim = {
     -- rocks.nvim config
     treesitter = {
-        -- tree-sitter configs here
+        -- This is the default config
+        auto_highlight = { },
+        auto_install = "prompt",
     },
 }
 ```

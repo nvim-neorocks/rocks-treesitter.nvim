@@ -1,33 +1,41 @@
 ---@mod rocks_treesitter.config
 
-local config
+---@package
+---@class RocksTreesitterConfig
+local config = {
+    ---@type boolean | "prompt"
+    auto_install = "prompt",
+    ---@type "all" | { [string]: boolean? }
+    auto_highlight = {},
+}
 
 local uv = vim.uv
 local api = require("rocks.api")
 
 ---@class RocksTreesitterOpts
----@field auto_install? boolean Auto-install parsers when needed?
----@field auto_highlight? string[] Languages to automatically enable syntax highlighting for.
-
----@class RocksTreesitterConfig
----@package
-local default_config = {
-    ---@type boolean | string[]
-    auto_install = false,
-    ---@type string[]
-    auto_highlight = {},
-}
+---@field auto_highlight? string[] | "all" Parsers to automatically enable syntax highlighting for. Note that these are parser languages, not file types. Defaults to an empty list.
+---@field auto_install? boolean | "prompt" Auto-install parsers in `auto_highlight` as needed? Default: 'prompt'
 
 local toml_config = api.get_rocks_toml()["tree-sitter"]
 ---@type RocksTreesitterOpts
 local lua_config = vim.g.rocks_nvim and vim.g.rocks_nvim.treesitter or {}
 
+local opts = {}
+
 if type(toml_config) == "table" then
-    config = vim.tbl_deep_extend("force", default_config, toml_config)
+    opts = vim.tbl_deep_extend("force", opts, toml_config)
 end
 
----@type RocksTreesitterConfig
-config = vim.tbl_deep_extend("force", config or default_config, lua_config)
+opts = vim.tbl_deep_extend("force", config or opts, lua_config)
+
+--- Map opts to configs, preserving defaults if not set
+config.auto_highlight = opts.auto_highlight == "all" and "all"
+    or vim.iter(opts.auto_highlight or {}):fold({}, function(acc, lang)
+        ---@cast lang string
+        acc[lang] = true
+        return acc
+    end)
+config.auto_install = opts.auto_install == nil and config.auto_install or opts.auto_install
 
 if not toml_config and not lua_config then
     local default_toml = [==[
