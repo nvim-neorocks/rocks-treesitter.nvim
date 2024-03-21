@@ -65,17 +65,18 @@ local function prompt_auto_install(rocks)
         if string.match(yesno, "^y.*") then
             install_rock_if_version_set(rock.version)
         end
+    elseif #rocks > 1 then
+        local choices = #rocks == 1 and { "yes", "no" }
+            or vim.iter(rocks)
+                :map(function(rock)
+                    ---@cast rock Rock
+                    return rock.version
+                end)
+                :totable()
+        vim.ui.select(choices, {
+            prompt = "Install " .. rocks[1].name .. "? Select a version or <C-c> to cancel",
+        }, install_rock_if_version_set)
     end
-    local choices = #rocks == 1 and { "yes", "no" }
-        or vim.iter(rocks)
-            :map(function(rock)
-                ---@cast rock Rock
-                return rock.version
-            end)
-            :totable()
-    vim.ui.select(choices, {
-        prompt = "Install " .. rocks[1].name .. "? Select a version or <C-c> to cancel",
-    }, install_rock_if_version_set)
 end
 
 ---@param config RocksTreesitterConfig
