@@ -27,7 +27,7 @@
 
 > [!WARNING]
 >
-> This module is WIP and not yet functional
+> This module is WIP and does not have a stable release yet.
 
 ## :star2: Summary
 
