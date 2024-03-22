@@ -26,7 +26,7 @@ end
 ---@param lang string
 ---@return boolean
 local function is_installed(lang)
-    local parser_file = ("parser/{}.{}"):format(lang, parser_extension)
+    local parser_file = vim.fs.joinpath("parser", "%s.%s"):format(lang, parser_extension)
     return not vim.tbl_isempty(vim.api.nvim_get_runtime_file(parser_file, true))
 end
 
