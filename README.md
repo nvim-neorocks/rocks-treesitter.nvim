@@ -101,6 +101,13 @@ auto_highlight = [
   "toml"
 ]
 auto_install = "prompt" # true | false
+
+[[treesitter.parser_map]]
+# You can add custom filetype to parser mappings
+# Determine the filetype with :lua =vim.bo[0].filetype
+tex = "latex"
+cls = "latex"
+sty = "latex"
 ```
 
 ### With lua:
@@ -111,9 +118,9 @@ Or, you add a lua table to your `vim.g.rocks_nvim` setting:
 vim.g.rocks_nvim = {
     -- rocks.nvim config
     treesitter = {
-        -- This is the default config
         auto_highlight = { },
         auto_install = "prompt",
+        parser_map = { },
     },
 }
 ```

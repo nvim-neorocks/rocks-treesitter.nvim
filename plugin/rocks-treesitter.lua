@@ -10,7 +10,7 @@ if
     ---@cast auto_highlight { [string]: boolean }
     or next(auto_highlight)
 then
-    require("rocks_treesitter.highlight").create_autocmd(config)
+    require("rocks_treesitter.highlight").create_autocmd()
 end
 
 vim.g.did_load_rocks_treesitter = true

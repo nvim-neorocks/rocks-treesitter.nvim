@@ -3,6 +3,11 @@
 local highlight = {}
 
 local api = require("rocks.api")
+local config = require("rocks_treesitter.config")
+
+for filetype, lang in pairs(config.parser_map) do
+    vim.treesitter.language.register(lang, filetype)
+end
 
 local sysname = vim.uv.os_uname().sysname:lower()
 local parser_extension = (sysname:find("windows") and "dll") or (sysname:find("darwin") and "dylib") or "so"
@@ -87,9 +92,8 @@ local function prompt_auto_install(rocks)
     -- end
 end
 
----@param config RocksTreesitterConfig
 ---@param lang string
-local function do_highlight(config, lang)
+local function do_highlight(lang)
     if is_installed(lang) then
         vim.treesitter.start()
         return
@@ -108,8 +112,7 @@ local function do_highlight(config, lang)
     end
 end
 
----@param config RocksTreesitterConfig
-function highlight.create_autocmd(config)
+function highlight.create_autocmd()
     vim.api.nvim_create_autocmd("FileType", {
         pattern = { "*" },
         group = vim.api.nvim_create_augroup("rocks_treesitter_higlight", { clear = true }),
@@ -119,7 +122,7 @@ function highlight.create_autocmd(config)
             local filetype = vim.bo[bufnr].filetype
             local lang = get_lang(filetype)
             if config.auto_highlight[lang] then
-                do_highlight(config, lang)
+                do_highlight(lang)
             end
         end,
     })
