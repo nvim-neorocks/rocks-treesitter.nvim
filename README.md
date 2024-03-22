@@ -73,7 +73,7 @@ However, you can override its default configuration in one of two ways:
 
 > [!WARNING]
 >
-> - Tree-sitter and nvim-treesitter highlighting are an experimental feature of Neovim.
+> - Tree-sitter and treesitter highlighting are an experimental feature of Neovim.
 >   As with nvim-treesitter, please consider tree-sitter support with this plugin
 >   experimental.
 >
