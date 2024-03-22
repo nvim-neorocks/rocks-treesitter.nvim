@@ -99,7 +99,9 @@ local function do_highlight(config, lang)
         return
     end
     if config.auto_install == "prompt" then
-        prompt_auto_install(rocks)
+        vim.schedule(function()
+            prompt_auto_install(rocks)
+        end)
     elseif config.auto_install then
         -- TODO: replace "dev" with nil once we have tagged releases
         api.install(rocks[1].name, "dev", try_start_highlight)
