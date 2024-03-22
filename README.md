@@ -98,7 +98,7 @@ auto_highlight = [
   "haskell",
   "dhall",
   "rust",
-  "zig"
+  "toml"
 ]
 auto_install = "prompt" # true | false
 ```
