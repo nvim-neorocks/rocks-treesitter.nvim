@@ -94,6 +94,7 @@ and use it to set any options you would otherwise pass to
 ```toml
 [treesitter]
 # auto_highlight = "all"
+# NOTE: These are parsers, not filetypes.
 auto_highlight = [
   "haskell",
   "dhall",
