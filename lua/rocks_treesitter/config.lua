@@ -8,29 +8,7 @@ local config = {
     ---@type "all" | table<string, boolean>
     auto_highlight = {},
     ---@type table<string, string>
-    parser_map = {
-        PKGBUILD = "bash",
-        ["html.handlebars"] = "glimmer",
-        ["typescript.tsx"] = "tsx",
-        apkbuild = "bash",
-        cls = "latex",
-        confini = "ini",
-        dosini = "ini",
-        ecma = "javascript",
-        html_tags = "html",
-        javascriptreact = "javascript",
-        jsx = "javascript",
-        pandoc = "markdown",
-        quarto = "markdown",
-        rmd = "markdown",
-        sbt = "scala",
-        sh = "bash",
-        sty = "latex",
-        svg = "xml",
-        systemverilog = "verilog",
-        xsd = "xml",
-        xslt = "xml",
-    },
+    parser_map = require("rocks_treesitter.ft_parser_map"),
 }
 
 local api = require("rocks.api")
@@ -62,6 +40,6 @@ config.auto_highlight = opts.auto_highlight == "all" and "all"
         return acc
     end)
 config.auto_install = opts.auto_install ~= nil and opts.auto_install or config.auto_install
-config.parser_map = vim.tbl_extend("force", opts.parser_map or {})
+config.parser_map = vim.tbl_extend("force", config.parser_map or opts.parser_map or {})
 
 return config
