@@ -40,6 +40,6 @@ config.auto_highlight = opts.auto_highlight == "all" and "all"
         return acc
     end)
 config.auto_install = opts.auto_install ~= nil and opts.auto_install or config.auto_install
-config.parser_map = vim.tbl_extend("force", config.parser_map or opts.parser_map or {})
+config.parser_map = vim.tbl_extend("force", config.parser_map, opts.parser_map or {})
 
 return config
