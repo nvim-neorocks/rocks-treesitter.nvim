@@ -7,6 +7,9 @@ concurrency:
   group: update-filetype-parser-mappings
   cancel-in-progress: true
 
+permissions:
+  contents: write
+
 on:
   push:
     branches:
