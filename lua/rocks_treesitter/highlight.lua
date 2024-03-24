@@ -40,7 +40,7 @@ end
 local function find_parser_rock(lang)
     local rock_name = "tree-sitter-" .. lang
     local rocks = api.try_get_cached_rocks()
-    return rocks[rock_name]
+    return rocks[rock_name] or {}
 end
 
 ---@param rock Rock
