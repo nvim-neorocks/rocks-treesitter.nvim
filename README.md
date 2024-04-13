@@ -106,6 +106,8 @@ auto_install = "prompt" # true | false
 [treesitter.parser_map]
 # You can add custom filetype to parser mappings.
 # Determine the filetype with ':lua =vim.bo[0].filetype'.
+# NOTE: You don't actually have to add these examples.
+# They are added by default.
 PKGBUILD = "bash"
 cls = "latex"
 sty = "latex"
