@@ -13,6 +13,11 @@
 
     gen-luarc.url = "github:mrcjkb/nix-gen-luarc-json";
 
+    rocks-nvim-flake = {
+      url = "github:nvim-neorocks/rocks.nvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     flake-parts.url = "github:hercules-ci/flake-parts";
 
     pre-commit-hooks = {
@@ -26,6 +31,7 @@
     nixpkgs,
     neorocks,
     gen-luarc,
+    rocks-nvim-flake,
     flake-parts,
     pre-commit-hooks,
     ...
@@ -46,6 +52,7 @@
         pkgs = import nixpkgs {
           inherit system;
           overlays = [
+            rocks-nvim-flake.overlays.default
             self.overlays.default
             neorocks.overlays.default
             gen-luarc.overlays.default
@@ -99,7 +106,11 @@
             ]);
         };
       in {
-        packages.default = pkgs.lua51Packages.rocks-treesitter-nvim;
+        packages = rec {
+          default = rocks-treesitter-nvim;
+          inherit (pkgs.lua51Packages) rocks-treesitter-nvim;
+          inherit (pkgs) neovim-with-rocks;
+        };
 
         devShells = {
           default = devShell;
@@ -114,7 +125,7 @@
         };
       };
       flake = {
-        overlays.default = import ./nix/overlay.nix {inherit self;};
+        overlays.default = import ./nix/overlay.nix {inherit self rocks-nvim-flake;};
       };
     };
 }
