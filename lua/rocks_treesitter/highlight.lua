@@ -45,7 +45,7 @@ end
 
 ---@param rock Rock
 local function try_start_highlight(rock)
-    local success = pcall(vim.cmd.Rocks, { "packadd", rock.name, bang = true })
+    local success = pcall(vim.cmd.packadd, { rock.name, bang = true })
     if not success then
         return
     end
