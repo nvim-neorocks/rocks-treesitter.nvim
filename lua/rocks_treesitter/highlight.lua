@@ -10,7 +10,7 @@ for filetype, lang in pairs(config.parser_map) do
 end
 
 local sysname = vim.uv.os_uname().sysname:lower()
-local parser_extension = (sysname:find("windows") and "dll") or (sysname:find("darwin") and "dylib") or "so"
+local parser_extension = (sysname:find("windows") and "dll") or "so"
 
 ---@class AutoCmdContext
 ---@field id integer autocommand id
