@@ -66,6 +66,9 @@ and you are good to go!
 This plugin works out of the box and doesn't need any configuration.
 However, you can override its default configuration in one of two ways:
 
+- In rocks.toml
+- With a Lua config
+
 > [!WARNING]
 >
 > - Tree-sitter and treesitter highlighting are an experimental feature of Neovim.
