@@ -61,11 +61,6 @@ This plugin is for convenience.
 Simply run `:Rocks install rocks-treesitter.nvim`,
 and you are good to go!
 
-> [!IMPORTANT]
->
-> Because this plugin comes with a large number of tree-sitter
-> parsers, the initial installation may take a long time.
-
 ## :books: Usage
 
 This plugin works out of the box and doesn't need any configuration.
