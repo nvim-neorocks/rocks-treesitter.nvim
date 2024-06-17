@@ -36,11 +36,17 @@ local function is_installed(lang)
 end
 
 ---@param lang string
----@return Rock[]
-local function find_parser_rock(lang)
+---@param callback fun(rock: Rock[])
+local function find_parser_rock(lang, callback)
     local rock_name = "tree-sitter-" .. lang
     local rocks = api.try_get_cached_rocks()
-    return rocks[rock_name] or {}
+    if rocks and rocks[rock_name] then
+        callback(rocks[rock_name])
+    end
+    -- Cache may not have been populated. Query luarocks.
+    api.query_luarocks_rocks(function(luarocks_rocks)
+        callback(luarocks_rocks[rock_name] or {})
+    end)
 end
 
 ---@param rock Rock
@@ -97,18 +103,19 @@ local function do_highlight(lang)
         vim.treesitter.start()
         return
     end
-    local rocks = find_parser_rock(lang)
-    if vim.tbl_isempty(rocks) then
-        return
-    end
-    if config.auto_install == "prompt" then
-        vim.schedule(function()
-            prompt_auto_install(rocks)
-        end)
-    elseif config.auto_install then
-        -- TODO: replace "dev" with nil once we have tagged releases
-        api.install(rocks[1].name, "dev", try_start_highlight)
-    end
+    find_parser_rock(lang, function(rocks)
+        if vim.tbl_isempty(rocks) then
+            return
+        end
+        if config.auto_install == "prompt" then
+            vim.schedule(function()
+                prompt_auto_install(rocks)
+            end)
+        elseif config.auto_install then
+            -- TODO: replace "dev" with nil once we have tagged releases
+            api.install(rocks[1].name, "dev", try_start_highlight)
+        end
+    end)
 end
 
 function highlight.create_autocmd()
