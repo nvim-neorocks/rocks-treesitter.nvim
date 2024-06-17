@@ -41,7 +41,7 @@ local function find_parser_rock(lang, callback)
     local rock_name = "tree-sitter-" .. lang
     local rocks = api.try_get_cached_rocks()
     if rocks and rocks[rock_name] then
-        callback(rocks[rock_name])
+        return callback(rocks[rock_name])
     end
     -- Cache may not have been populated. Query luarocks.
     api.query_luarocks_rocks(function(luarocks_rocks)
