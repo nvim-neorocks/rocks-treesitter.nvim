@@ -17,7 +17,7 @@
   </p>
   <p>
     <strong>
-      A "just works" tree-sitter setup for <a href="https://github.com/nvim-neorocks/rocks.nvim/">rocks.nvim</a>!
+      A WIP "just works" tree-sitter setup for <a href="https://github.com/nvim-neorocks/rocks.nvim/">rocks.nvim</a>!
     </strong>
   </p>
 </div>
