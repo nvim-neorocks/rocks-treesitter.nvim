@@ -29,6 +29,16 @@
 >
 > This module is **A WORK IN PROGRESS** and does not have a stable release yet.
 
+> [!WARNING]
+>
+> - Tree-sitter and treesitter highlighting are an experimental feature of Neovim.
+>   As with nvim-treesitter, please consider tree-sitter support with this plugin
+>   experimental.
+>
+> - We are not affiliated with the nvim-treesitter maintainers.
+>   If you are facing issues with tree-sitter support in rocks.nvim,
+>   please don't bug them.
+
 ## :star2: Summary
 
 `rocks-treesitter.nvim` is a rocks.nvim module that helps you manage
@@ -68,16 +78,6 @@ However, you can override its default configuration in one of two ways:
 
 - In rocks.toml
 - With a Lua config
-
-> [!WARNING]
->
-> - Tree-sitter and treesitter highlighting are an experimental feature of Neovim.
->   As with nvim-treesitter, please consider tree-sitter support with this plugin
->   experimental.
->
-> - We are not affiliated with the nvim-treesitter maintainers.
->   If you are facing issues with tree-sitter support in rocks.nvim,
->   please don't bug them.
 
 ## :wrench: Configuration
 
