@@ -20,8 +20,8 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
 
-    pre-commit-hooks = {
-      url = "github:cachix/pre-commit-hooks.nix";
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -33,7 +33,7 @@
     gen-luarc,
     rocks-nvim-flake,
     flake-parts,
-    pre-commit-hooks,
+    git-hooks,
     ...
   }:
     flake-parts.lib.mkFlake {inherit inputs;} {
@@ -61,23 +61,22 @@
 
         luarc = pkgs.mk-luarc {
           nvim = pkgs.neovim-nightly;
-          neodev-types = "nightly";
           plugins = with pkgs.lua51Packages; [
             rocks-nvim
           ];
         };
 
-        type-check-nightly = pre-commit-hooks.lib.${system}.run {
+        type-check-nightly = git-hooks.lib.${system}.run {
           src = self;
           hooks = {
-            lua-ls.enable = true;
-          };
-          settings = {
-            lua-ls.config = luarc;
+            lua-ls = {
+              enable = true;
+              settings.configuration = luarc;
+            };
           };
         };
 
-        pre-commit-check = pre-commit-hooks.lib.${system}.run {
+        pre-commit-check = git-hooks.lib.${system}.run {
           src = self;
           hooks = {
             alejandra.enable = true;
@@ -93,14 +92,8 @@
             ${pre-commit-check.shellHook}
             ln -fs ${pkgs.luarc-to-json luarc} .luarc.json
           '';
-          buildInputs = with pre-commit-hooks.packages.${system};
-            [
-              alejandra
-              lua-language-server
-              stylua
-              luacheck
-              editorconfig-checker
-            ]
+          buildInputs =
+            self.checks.${system}.pre-commit-check.enabledPackages
             ++ (with pkgs; [
               (lua5_1.withPackages (ps: with ps; [luarocks dkjson]))
             ]);
