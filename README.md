@@ -84,10 +84,7 @@ However, you can override its default configuration in one of two ways:
 ### Using rocks.toml
 
 You can add a `[treesitter]` section to your rocks.toml,
-and use it to set any options you would otherwise pass to
-`require("nvim-treesitter.configs").setup {}`[^1].
-
-[^1]: See [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) for configuration options.
+and use it to configure this plugin.
 
 ```toml
 [treesitter]
