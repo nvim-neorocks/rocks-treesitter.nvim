@@ -129,12 +129,6 @@ vim.g.rocks_nvim = {
 > lua configuration is given higher priority,
 > to support things like `:h exrc`.
 
-## :construction: Current limitations
-
-- Currently, we are having issues building the tree-sitter parsers for
-  Windows in our rocks-binaries CI. It is likely that you will run into
-  the same issues if you are on Windows.
-
 ## :book: License
 
 `rocks-treesitter.nvim` is licensed under [GPLv3](./LICENSE).
