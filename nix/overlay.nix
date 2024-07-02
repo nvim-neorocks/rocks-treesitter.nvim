@@ -102,5 +102,5 @@ in {
       };
     };
 
-  rocks-treesitter-nvim = luajitPackages.rocks-treesitter-nvim;
+  rocks-treesitter-nvim = final.luajitPackages.rocks-treesitter-nvim;
 }
