@@ -101,6 +101,4 @@ in {
         src = self;
       };
     };
-
-  rocks-treesitter-nvim = final.luajitPackages.rocks-treesitter-nvim;
 }

@@ -101,7 +101,7 @@
       in {
         packages = rec {
           default = rocks-treesitter-nvim;
-          inherit (pkgs.lua51Packages) rocks-treesitter-nvim;
+          inherit (pkgs.luajitPackages) rocks-treesitter-nvim;
           inherit (pkgs) neovim-with-rocks;
         };
 
