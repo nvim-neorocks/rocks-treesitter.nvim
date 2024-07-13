@@ -82,7 +82,7 @@ local function prompt_auto_install(rocks)
     -- TODO: Enable check when we have tagged releases
     -- if #rocks == 1 then
     local rock = rocks[1]
-    local choice = vim.fn.confirm("Install " .. rock.name .. "?", "y/n", "n", "Question")
+    local choice = vim.fn.confirm("Install " .. rock.name .. "?", "&Yes\n&No", 2, "Question")
     install_rock_or_mark_declined(choice == 1 and rock.version or nil)
     -- elseif #rocks > 1 then
     --     local choices = vim.iter(rocks)
