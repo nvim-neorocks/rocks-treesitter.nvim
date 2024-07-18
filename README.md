@@ -42,7 +42,8 @@ and use [tree-sitter](https://neovim.io/doc/user/treesitter.html) parsers.
 
 It aims to be a minimal replacement for [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter).
 
-Parsers, bundled with queries, are hosted on [rocks-binaries (dev)](https://nvim-neorocks.github.io/rocks-binaries-dev/),
+Parsers, bundled with queries, are hosted on [rocks-binaries](https://nvim-neorocks.github.io/rocks-binaries/)
+and [rocks-binaries-dev](https://nvim-neorocks.github.io/rocks-binaries-dev/),
 so that you don't have to compile them on your machine.
 
 ### Do I need this plugin?
