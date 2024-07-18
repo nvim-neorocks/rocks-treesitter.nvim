@@ -83,6 +83,12 @@
             stylua.enable = true;
             luacheck.enable = true;
             editorconfig-checker.enable = true;
+            panvimdoc = {
+              enable = true;
+              name = "panvimdoc";
+              entry = "${pkgs.panvimdoc}/bin/panvimdoc --project-name rocks-treesitter.nvim --toc false --treesitter true --demojify true --input-file";
+              files = "README.md";
+            };
           };
         };
 

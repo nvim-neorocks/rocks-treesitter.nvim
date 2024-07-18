@@ -27,10 +27,6 @@
 
 > [!WARNING]
 >
-> This module is **A WORK IN PROGRESS** and does not have a stable release yet.
-
-> [!WARNING]
->
 > - Tree-sitter and treesitter highlighting are an experimental feature of Neovim.
 >   As with nvim-treesitter, please consider tree-sitter support with this plugin
 >   experimental.
