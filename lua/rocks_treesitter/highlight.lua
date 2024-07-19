@@ -70,8 +70,7 @@ local function prompt_auto_install(rocks)
     ---@param version string?
     local function install_rock_or_mark_declined(version)
         if version then
-            -- TODO: replace "dev" with version once we have tagged releases
-            api.install(rock_name, "dev", function(installed_rock)
+            api.install(rock_name, version, function(installed_rock)
                 ---@cast installed_rock Rock
                 try_start_highlight(installed_rock)
             end)
@@ -79,7 +78,7 @@ local function prompt_auto_install(rocks)
             _declined_installs[rock_name] = true
         end
     end
-    -- TODO: Enable check when we have tagged releases
+    -- TODO: Enable check when we have proper semver releases
     -- if #rocks == 1 then
     local rock = rocks[1]
     local choice = vim.fn.confirm("Install " .. rock.name .. "?", "&Yes\n&No", 2, "Question")
@@ -112,8 +111,7 @@ local function do_highlight(lang)
                 prompt_auto_install(rocks)
             end)
         elseif config.auto_install then
-            -- TODO: replace "dev" with nil once we have tagged releases
-            api.install(rocks[1].name, "dev", try_start_highlight)
+            api.install(rocks[1].name, nil, try_start_highlight)
         end
     end)
 end
