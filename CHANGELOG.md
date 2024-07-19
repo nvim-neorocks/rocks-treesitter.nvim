@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/nvim-neorocks/rocks-treesitter.nvim/compare/v1.0.0...v1.0.1) (2024-07-19)
+
+
+### Bug Fixes
+
+* don't install `dev` parsers ([448652a](https://github.com/nvim-neorocks/rocks-treesitter.nvim/commit/448652aba68eb65e76d4125537b3756a57efa559))
+
 ## 1.0.0 (2024-07-18)
 
 
