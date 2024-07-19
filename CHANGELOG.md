@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/nvim-neorocks/rocks-treesitter.nvim/compare/v1.0.1...v1.0.2) (2024-07-19)
+
+
+### Bug Fixes
+
+* install latest non-dev parser version if available ([c63b5bb](https://github.com/nvim-neorocks/rocks-treesitter.nvim/commit/c63b5bba9f37824d4f97340a6c7d8ca43c8e5b1a))
+
 ## [1.0.1](https://github.com/nvim-neorocks/rocks-treesitter.nvim/compare/v1.0.0...v1.0.1) (2024-07-19)
 
 
