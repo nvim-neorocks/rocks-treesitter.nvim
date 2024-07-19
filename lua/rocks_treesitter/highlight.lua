@@ -78,22 +78,34 @@ local function prompt_auto_install(rocks)
             _declined_installs[rock_name] = true
         end
     end
-    -- TODO: Enable check when we have proper semver releases
-    -- if #rocks == 1 then
-    local rock = rocks[1]
-    local choice = vim.fn.confirm("Install " .. rock.name .. "?", "&Yes\n&No", 2, "Question")
-    install_rock_or_mark_declined(choice == 1 and rock.version or nil)
-    -- elseif #rocks > 1 then
-    --     local choices = vim.iter(rocks)
-    --         :map(function(rock)
-    --             ---@cast rock Rock
-    --             return rock.version
-    --         end)
-    --         :totable()
-    --     vim.ui.select(choices, {
-    --         prompt = "Install " .. rock_name .. "? Select a version or <C-c> to cancel",
-    --     }, install_rock_or_mark_declined)
-    -- end
+    if vim.tbl_isempty(rocks) then
+        return
+    end
+    local choice = vim.fn.confirm("Install " .. rocks[1].name .. "?", "&Yes\n&No", 2, "Question")
+    if #rocks == 1 then
+        install_rock_or_mark_declined(choice == 1 and rocks[1].version or nil)
+    elseif #rocks > 1 then
+        local latest_version = vim.iter(rocks):fold(
+            nil,
+            ---@param latest_version vim.Version | nil
+            ---@param rock Rock
+            function(latest_version, rock)
+                ---@type boolean, vim.Version?
+                local ok, version = pcall(vim.version.parse, rock.version)
+                if
+                    ok
+                    and latest_version
+                    and version --[[ @as vim.Version ]]
+                        > latest_version
+                then
+                    return version
+                elseif ok then
+                    return version
+                end
+            end
+        )
+        install_rock_or_mark_declined(choice == 1 and tostring(latest_version or "dev") or nil)
+    end
 end
 
 ---@param lang string
