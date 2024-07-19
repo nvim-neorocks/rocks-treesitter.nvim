@@ -86,7 +86,7 @@
             panvimdoc = {
               enable = true;
               name = "panvimdoc";
-              entry = "${pkgs.panvimdoc}/bin/panvimdoc --project-name rocks-treesitter.nvim --toc false --treesitter true --demojify true --input-file";
+              entry = "${pkgs.panvimdoc}/bin/panvimdoc --project-name rocks-treesitter.nvim --toc false --treesitter true --demojify true --description ' A `just works` tree-sitter setup for rocks.nvim!' --input-file";
               files = "README.md";
             };
           };
@@ -102,6 +102,8 @@
             self.checks.${system}.pre-commit-check.enabledPackages
             ++ (with pkgs; [
               (lua5_1.withPackages (ps: with ps; [luarocks dkjson]))
+              lua-language-server
+              panvimdoc
             ]);
         };
       in {

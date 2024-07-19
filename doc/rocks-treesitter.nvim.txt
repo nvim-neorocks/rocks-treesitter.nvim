@@ -1,4 +1,6 @@
-*rocks-treesitter.nvim.txt*           For            Last change: 2024 July 18
+*rocks-treesitter.nvim.txt* A `just works` tree-sitter setup for rocks.nvim!
+
+Topics
 
 <https://luarocks.org/modules/neorocks/rocks-treesitter.nvim>
 
