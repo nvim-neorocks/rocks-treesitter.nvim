@@ -1,16 +1,11 @@
-*rocks-treesitter.nvim.txt* A `just works` tree-sitter setup for rocks.nvim!
-
-Topics
+*rocks-treesitter.nvim.txt*   A `just works` tree-sitter setup for rocks.nvim!
 
 <https://luarocks.org/modules/neorocks/rocks-treesitter.nvim>
 
 
   [!WARNING]
-  - Tree-sitter and treesitter highlighting are an experimental feature of Neovim.
-      As with nvim-treesitter, please consider tree-sitter support with this plugin
-      experimental.
-  - We are not affiliated with the nvim-treesitter maintainers. If you are facing
-      issues with tree-sitter support in rocks.nvim, please don’t bug them.
+  **We are not affiliated with the nvim-treesitter maintainers. If you are facing
+  issues with tree-sitter support in rocks.nvim, please don’t bug them.**
 
 SUMMARY                                        *rocks-treesitter.nvim-summary*
 
