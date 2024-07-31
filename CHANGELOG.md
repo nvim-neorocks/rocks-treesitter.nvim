@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/nvim-neorocks/rocks-treesitter.nvim/compare/v1.0.2...v1.0.3) (2024-07-31)
+
+
+### Bug Fixes
+
+* **config:** handle when `auto_install` is `false` ([#24](https://github.com/nvim-neorocks/rocks-treesitter.nvim/issues/24)) ([3d19180](https://github.com/nvim-neorocks/rocks-treesitter.nvim/commit/3d19180ecfafa4abe1e121d36577406f6587b4bb))
+
 ## [1.0.2](https://github.com/nvim-neorocks/rocks-treesitter.nvim/compare/v1.0.1...v1.0.2) (2024-07-19)
 
 
