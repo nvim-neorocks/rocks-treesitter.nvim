@@ -39,7 +39,7 @@ config.auto_highlight = opts.auto_highlight == "all" and "all"
         acc[lang] = true
         return acc
     end)
-config.auto_install = opts.auto_install ~= nil and opts.auto_install or config.auto_install
+config.auto_install = vim.F.if_nil(opts.auto_install, config.auto_install)
 config.parser_map = vim.tbl_extend("force", config.parser_map, opts.parser_map or {})
 
 return config
