@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/nvim-neorocks/rocks-treesitter.nvim/compare/v1.0.3...v1.1.0) (2024-08-28)
+
+
+### Features
+
+* more fine-grained control for disabling highlighting ([#29](https://github.com/nvim-neorocks/rocks-treesitter.nvim/issues/29)) ([b0ee339](https://github.com/nvim-neorocks/rocks-treesitter.nvim/commit/b0ee339a6f61a47a7eacf16a7119d0761a340f9a))
+
 ## [1.0.3](https://github.com/nvim-neorocks/rocks-treesitter.nvim/compare/v1.0.2...v1.0.3) (2024-07-31)
 
 
