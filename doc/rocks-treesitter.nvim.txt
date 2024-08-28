@@ -75,6 +75,10 @@ configure this plugin.
       "toml"
     ]
     auto_install = "prompt" # true | false
+    # NOTE: These are filetypes
+    disable = [
+      "lhaskell"
+    ]
     
     [treesitter.parser_map]
     # You can add custom filetype to parser mappings.
@@ -98,6 +102,8 @@ Or, you add a lua table to your `vim.g.rocks_nvim` setting:
             auto_highlight = { },
             auto_install = "prompt",
             parser_map = { },
+            ---@type string[] | fun(lang: string, bufnr: integer):boolean
+            disable = { }, -- filetypes or a function
         },
     }
 <

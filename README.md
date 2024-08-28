@@ -90,6 +90,10 @@ auto_highlight = [
   "toml"
 ]
 auto_install = "prompt" # true | false
+# NOTE: These are filetypes
+disable = [
+  "lhaskell"
+]
 
 [treesitter.parser_map]
 # You can add custom filetype to parser mappings.
@@ -112,6 +116,8 @@ vim.g.rocks_nvim = {
         auto_highlight = { },
         auto_install = "prompt",
         parser_map = { },
+        ---@type string[] | fun(lang: string, bufnr: integer):boolean
+        disable = { }, -- filetypes or a function
     },
 }
 ```
