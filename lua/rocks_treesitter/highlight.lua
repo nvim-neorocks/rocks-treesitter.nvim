@@ -138,8 +138,12 @@ function highlight.create_autocmd()
             local filetype = vim.bo[bufnr].filetype
             local lang = get_lang(filetype)
             ---@type boolean | nil
-            local disable = type(config.disable) == "function" and config.disable(lang, bufnr)
-                or config.disable[filetype]
+            local disable
+            if type(config.disable) == "function" then
+                disable = config.disable(lang, bufnr)
+            else 
+                disable = config.disable[filetype]
+            end
             if not disable and config.auto_highlight == "all" or config.auto_highlight[lang] then
                 do_highlight(lang)
             end
