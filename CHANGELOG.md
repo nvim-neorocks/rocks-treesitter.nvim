@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/nvim-neorocks/rocks-treesitter.nvim/compare/v1.1.0...v1.1.1) (2024-08-29)
+
+
+### Bug Fixes
+
+* error when disable config returns `false` ([63b711c](https://github.com/nvim-neorocks/rocks-treesitter.nvim/commit/63b711c6d0d10db80ff8550cfe840bd7d2200967)), closes [#31](https://github.com/nvim-neorocks/rocks-treesitter.nvim/issues/31)
+
 ## [1.1.0](https://github.com/nvim-neorocks/rocks-treesitter.nvim/compare/v1.0.3...v1.1.0) (2024-08-28)
 
 
