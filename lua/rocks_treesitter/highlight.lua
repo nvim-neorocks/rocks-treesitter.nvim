@@ -141,7 +141,7 @@ function highlight.create_autocmd()
             local disable
             if type(config.disable) == "function" then
                 disable = config.disable(lang, bufnr)
-            else 
+            else
                 disable = config.disable[filetype]
             end
             if not disable and config.auto_highlight == "all" or config.auto_highlight[lang] then
