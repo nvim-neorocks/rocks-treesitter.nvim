@@ -92,15 +92,10 @@ local function prompt_auto_install(rocks)
             function(latest_version, rock)
                 ---@type boolean, vim.Version?
                 local ok, version = pcall(vim.version.parse, rock.version)
-                if
-                    ok
-                    and latest_version
-                    and version --[[ @as vim.Version ]]
-                        > latest_version
-                then
-                    return version
-                elseif ok then
-                    return version
+                if latest_version then
+                    return (ok and version and version > latest_version and version) or latest_version
+                else
+                    return ok and version
                 end
             end
         )
