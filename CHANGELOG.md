@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/nvim-neorocks/rocks-treesitter.nvim/compare/v1.1.1...v1.1.2) (2024-08-31)
+
+
+### Bug Fixes
+
+* handle `vim.version.parse` returning `nil` ([#34](https://github.com/nvim-neorocks/rocks-treesitter.nvim/issues/34)) ([615dabe](https://github.com/nvim-neorocks/rocks-treesitter.nvim/commit/615dabe51559e4c35714d4f4405d9d848f8d0dc1))
+
 ## [1.1.1](https://github.com/nvim-neorocks/rocks-treesitter.nvim/compare/v1.1.0...v1.1.1) (2024-08-29)
 
 
