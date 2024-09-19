@@ -62,44 +62,41 @@ end
 local _declined_installs = {}
 
 ---@param rocks Rock[]
-local function prompt_auto_install(rocks)
-    local rock_name = rocks[1].name
-    if _declined_installs[rock_name] then
-        return
-    end
-    ---@param version string?
-    local function install_rock_or_mark_declined(version)
-        if version then
-            api.install(rock_name, version, function(installed_rock)
-                ---@cast installed_rock Rock
-                try_start_highlight(installed_rock)
-            end)
-        else
-            _declined_installs[rock_name] = true
-        end
-    end
-    if vim.tbl_isempty(rocks) then
-        return
-    end
-    local choice = vim.fn.confirm("Install " .. rocks[1].name .. "?", "&Yes\n&No", 2, "Question")
-    if #rocks == 1 then
-        install_rock_or_mark_declined(choice == 1 and rocks[1].version or nil)
-    elseif #rocks > 1 then
-        local latest_version = vim.iter(rocks):fold(
+local function install_latest_version(rocks)
+    local latest_version = rocks[1].version
+    if #rocks > 1 then
+        latest_version = vim.iter(rocks):fold(
             nil,
-            ---@param latest_version vim.Version | nil
+            ---@param latest_version_ vim.Version | nil
             ---@param rock Rock
-            function(latest_version, rock)
+            function(latest_version_, rock)
                 ---@type boolean, vim.Version?
                 local ok, version = pcall(vim.version.parse, rock.version)
-                if latest_version then
-                    return (ok and version and version > latest_version and version) or latest_version
+                if latest_version_ then
+                    return (ok and version and version > latest_version_ and version) or latest_version_
                 else
                     return ok and version
                 end
             end
         )
-        install_rock_or_mark_declined(choice == 1 and tostring(latest_version or "dev") or nil)
+    end
+    api.install(rocks[1].name, tostring(latest_version or "dev"), try_start_highlight)
+end
+
+---@param rocks Rock[]
+local function prompt_auto_install(rocks)
+    local rock_name = rocks[1].name
+    if _declined_installs[rock_name] then
+        return
+    end
+    if vim.tbl_isempty(rocks) then
+        return
+    end
+    local choice = vim.fn.confirm("Install " .. rocks[1].name .. "?", "&Yes\n&No", 2, "Question")
+    if choice == 1 then
+        install_latest_version(rocks)
+    else
+        _declined_installs[rock_name] = true
     end
 end
 
@@ -118,7 +115,7 @@ local function do_highlight(lang)
                 prompt_auto_install(rocks)
             end)
         elseif config.auto_install then
-            api.install(rocks[1].name, nil, try_start_highlight)
+            install_latest_version(rocks)
         end
     end)
 end
