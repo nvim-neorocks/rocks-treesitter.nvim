@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/nvim-neorocks/rocks-treesitter.nvim/compare/v1.1.2...v1.1.3) (2024-09-19)
+
+
+### Bug Fixes
+
+* prefer released version over dev package when using auto_install ([#36](https://github.com/nvim-neorocks/rocks-treesitter.nvim/issues/36)) ([9cddec4](https://github.com/nvim-neorocks/rocks-treesitter.nvim/commit/9cddec4e82bb42eea948d8d76fef64c9e44ea193))
+
 ## [1.1.2](https://github.com/nvim-neorocks/rocks-treesitter.nvim/compare/v1.1.1...v1.1.2) (2024-08-31)
 
 
