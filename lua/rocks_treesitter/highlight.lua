@@ -80,7 +80,10 @@ local function install_latest_version(rocks)
             end
         )
     end
-    api.install(rocks[1].name, tostring(latest_version or "dev"), try_start_highlight)
+    api.install(rocks[1].name, tostring(latest_version or "dev"), {
+        callback = try_start_highlight,
+        config_path = config.config_path,
+    })
 end
 
 ---@param rocks Rock[]

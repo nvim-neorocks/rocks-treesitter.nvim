@@ -11,6 +11,8 @@ local config = {
     disable = {},
     ---@type table<string, string>
     parser_map = require("rocks_treesitter.ft_parser_map"),
+    ---@type string?
+    config_path = nil,
 }
 
 local api = require("rocks.api")
@@ -32,6 +34,11 @@ local api = require("rocks.api")
 --- File types to disable highlighting for (lua + toml config)
 --- or a function to conditionally disable highlighting (lua only)
 ---@field disable? string[] | fun(lang: string, bufnr: integer):boolean
+---
+--- Specify a config path, relative to the base rocks config file, to
+--- install treesitter rocks (ex. "rocks-treesitter.toml"). If not set, they will be added
+--- to the base config file
+--- @field config_path? string
 
 local toml_config = api.get_rocks_toml()["treesitter"]
 ---@type RocksTreesitterOpts
@@ -75,5 +82,6 @@ config.disable = type(opts.disable) == "function" and opts.disable
 ---@diagnostic disable-next-line: assign-type-mismatch
 config.auto_install = vim.F.if_nil(opts.auto_install, config.auto_install)
 config.parser_map = vim.tbl_extend("force", config.parser_map, opts.parser_map or {})
+config.config_path = vim.F.if_nil(opts.config_path)
 
 return config
