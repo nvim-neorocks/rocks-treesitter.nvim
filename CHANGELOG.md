@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/nvim-neorocks/rocks-treesitter.nvim/compare/v1.1.3...v1.2.0) (2024-11-16)
+
+
+### Features
+
+* Add support for an optional import config path ([#41](https://github.com/nvim-neorocks/rocks-treesitter.nvim/issues/41)) ([deba3c2](https://github.com/nvim-neorocks/rocks-treesitter.nvim/commit/deba3c21d66bb641e78ba16fc6e7d6e177a1e3ff))
+
 ## [1.1.3](https://github.com/nvim-neorocks/rocks-treesitter.nvim/compare/v1.1.2...v1.1.3) (2024-09-19)
 
 
