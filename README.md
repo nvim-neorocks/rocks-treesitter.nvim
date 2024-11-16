@@ -94,6 +94,7 @@ auto_install = "prompt" # true | false
 disable = [
   "lhaskell"
 ]
+config_path = "rocks-treesitter.toml"
 
 [treesitter.parser_map]
 # You can add custom filetype to parser mappings.
@@ -118,6 +119,7 @@ vim.g.rocks_nvim = {
         parser_map = { },
         ---@type string[] | fun(lang: string, bufnr: integer):boolean
         disable = { }, -- filetypes or a function
+        config_path = "rocks-treesitter.toml",
     },
 }
 ```
