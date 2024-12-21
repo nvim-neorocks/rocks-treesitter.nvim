@@ -8,6 +8,7 @@
 
 return {
     PKGBUILD = "bash",
+    pacscript = "bash",
     ["html.handlebars"] = "glimmer",
     ["typescript.tsx"] = "tsx",
     apkbuild = "bash",
