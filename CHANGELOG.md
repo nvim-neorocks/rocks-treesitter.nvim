@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/nvim-neorocks/rocks-treesitter.nvim/compare/v1.2.0...v1.3.0) (2024-12-21)
+
+
+### Features
+
+* add filetype .pacscript to parser map ([#44](https://github.com/nvim-neorocks/rocks-treesitter.nvim/issues/44)) ([a565e19](https://github.com/nvim-neorocks/rocks-treesitter.nvim/commit/a565e192c5e56c79e2d6c9f639b244061a007ce7))
+
 ## [1.2.0](https://github.com/nvim-neorocks/rocks-treesitter.nvim/compare/v1.1.3...v1.2.0) (2024-11-16)
 
 
