@@ -4,7 +4,7 @@ package = "rocks-treesitter.nvim"
 version = _MODREV .. _SPECREV
 
 dependencies = {
-    "lua >= 5.1",
+    "lua == 5.1",
     "rocks.nvim >= 2.42.0",
 }
 
