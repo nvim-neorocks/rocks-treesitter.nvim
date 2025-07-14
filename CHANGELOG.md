@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/nvim-neorocks/rocks-treesitter.nvim/compare/v1.3.0...v1.3.1) (2025-07-14)
+
+
+### Bug Fixes
+
+* **rockspec:** restrict lua version to 5.1 ([f624d0d](https://github.com/nvim-neorocks/rocks-treesitter.nvim/commit/f624d0db18000e37bd9dda26839801075c50e920))
+
 ## [1.3.0](https://github.com/nvim-neorocks/rocks-treesitter.nvim/compare/v1.2.0...v1.3.0) (2024-12-21)
 
 
